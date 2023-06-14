@@ -1,11 +1,8 @@
 import React from "react";
 import "../styles/main.css";
 import BankLogo from "../images/argentBankLogo.png";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-free/css/all.css";
+import UserIcone from "../items/userIcone";
 
-library.add(faUserCircle);
 
 function Header() {
   // It has to be a <nav> to respect the given main.css as well.
@@ -21,7 +18,7 @@ function Header() {
       </a>
       <div>
         <a className="main-nav-item" href="./sign-in">
-          <i className="fa fa-user-circle"></i>
+          <UserIcone />
           Sign In
         </a>
       </div>

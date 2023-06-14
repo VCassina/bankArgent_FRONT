@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>ArgentBank - Votre banque en ligne</title>
+        <title>ArgentBank - Your online bank</title>
       </Helmet>
       <Header />
       <Routes />
