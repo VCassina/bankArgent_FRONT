@@ -7,9 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 library.add(faUserCircle);
 
 function userIcone() {
-    return (
-        <i className="fa fa-user-circle"></i>
-    );
+  return <i className="fa fa-user-circle"></i>;
 }
 
 export default userIcone;
