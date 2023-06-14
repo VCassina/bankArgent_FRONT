@@ -15,7 +15,7 @@ function SignInPage() {
           <InputWrapper category="username" type="text" title="Username" />
           <InputWrapper category="password" type="password" title="Password" />
           <Remember />
-          <a href="./user.html" className="sign-in-button">Sign In</a>
+          <a href="./user" className="sign-in-button">Sign In</a>
         </form>
         </section>
       </main>
