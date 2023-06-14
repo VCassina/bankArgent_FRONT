@@ -54,6 +54,10 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+
+  /* Ajustement nécéssaire lors du passage React : */
+  display: flex;
+  gap: 4px;
 }
 
 .main-nav-item:hover {
@@ -71,7 +75,7 @@ body {
 }
 
 .hero {
-  background-image: url('../img/bank-tree.jpeg');
+  background-image: url('../images/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;

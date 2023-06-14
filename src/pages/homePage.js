@@ -1,12 +1,18 @@
-/* CODE REACT DE LA GENERATION DE PAGE "ACCUEIL" ! */
-import React from "react";
-import "./desi";
+import React, { Fragment } from "react";
+import "../styles/main.css";
+import Header from "../components/Header";
+import Banner from "../components/Banner";
+import Footer from "../components/Footer";
 
 function HomePage() {
   return (
-    <div className="homepage_div">
-        HOMEPAGE
-    </div>
+    <>
+      <Header />
+      <main>
+        <Banner />
+      </main>
+      <Footer />
+    </>
   );
 }
 
