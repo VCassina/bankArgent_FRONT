@@ -3,7 +3,7 @@ import "../styles/main.css";
 import BankLogo from "../images/argentBankLogo.png";
 import UserIcone from "../items/userIcone";
 
-
+// REDUX will be implemented to modify SignIn to SignOut depending of the state of "isUserLogged" later.
 function Header() {
   // It has to be a <nav> to respect the given main.css as well.
   return (

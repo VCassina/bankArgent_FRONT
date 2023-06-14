@@ -3,7 +3,6 @@ import "../styles/main.css";
 
 function ArticlePoint(props) {
   const { picture, pictureAlt, title, texte } = props;
-  console.log(picture)
 
   return (
     <div className="feature-item">
