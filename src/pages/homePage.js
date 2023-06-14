@@ -1,17 +1,27 @@
 import React, { Fragment } from "react";
 import "../styles/main.css";
-import Header from "../components/Header";
+import HomePageData from "../datas/homePageContent.json";
 import Banner from "../components/Banner";
-import Footer from "../components/Footer";
+import ArticlePoint from "../components/ArticlePoint";
 
 function HomePage() {
   return (
     <>
-      <Header />
       <main>
         <Banner />
+        <section className="features">
+          <h2 className="sr-only">Features</h2>
+          {HomePageData.map((item) => (
+            <ArticlePoint
+              key={item.id}
+              picture={item.picture}
+              pictureAlt={item.pictureAlt}
+              title={item.title}
+              texte={item.texte}
+            />
+          ))}
+        </section>
       </main>
-      <Footer />
     </>
   );
 }
