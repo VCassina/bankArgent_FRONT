@@ -104,6 +104,14 @@ body {
   font-size: 0.9rem;
 }
 
+.errorMessage {
+  color: red;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: smaller;
+}
+
 @media (min-width: 920px) {
   .hero {
     height: 400px;

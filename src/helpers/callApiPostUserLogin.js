@@ -7,11 +7,7 @@ async function callAPI(email, password) {
         },
         body: JSON.stringify({ email, password }),
       });
-  
-      if (!response.ok) {
-        throw new Error('Err!');
-      }
-  
+    
       const data = await response.json();
       // Check if informations are succesfully collected.
       console.log(data);
