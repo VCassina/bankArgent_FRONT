@@ -4,6 +4,10 @@ import Routes from "./Routes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Helmet } from 'react-helmet';
+import store from "./store";
+
+// This globalState section will be removed.
+console.log(store.getState().isLoggedUser);
 
 function App() {
   return (

@@ -2,13 +2,40 @@ import React from "react";
 import "../styles/main.css";
 import BankLogo from "../images/argentBankLogo.png";
 import UserIcone from "../items/userIcone";
+import UserLogOut from "../items/userLogOut";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutAction } from "../store";
 
-// REDUX will be implemented to modify SignIn to SignOut depending of the state of "isUserLogged" later.
+// REDUX will be implemented to modify SignIn to SignOut depending of the state of "isLoggedUser" later.
 function Header() {
+  const isLoggedUser = useSelector((state) => state.isLoggedUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleNavigationSignIn = (event) => {
+    event.preventDefault();
+    if (isLoggedUser) {
+      navigate("/user");
+    } else {
+      navigate("/sign-in");
+    }
+  };
+
+  const handleNavigationSignOut = (event) => {
+    event.preventDefault();
+    dispatch(logoutAction());
+  };
+
+  const handleNavigationHome = (event) => {
+    event.preventDefault();
+    navigate("/");
+  };
+
   // It has to be a <nav> to respect the given main.css as well.
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="/">
+      <a className="main-nav-logo" href="/" onClick={handleNavigationHome}>
         <img
           className="main-nav-logo-image"
           src={BankLogo}
@@ -16,10 +43,20 @@ function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </a>
-      <div>
-        <a className="main-nav-item" href="./sign-in">
+      <div className="main-nav-title">
+        <a className="main-nav-item" href="/" onClick={handleNavigationSignIn}>
           <UserIcone />
-          Sign In
+          <span className="title-text">
+            {isLoggedUser ? "USER" : "Sign in"}
+          </span>
+        </a>
+        <a
+          className={isLoggedUser ? "main-nav-item" : "hidden"}
+          href="/"
+          onClick={handleNavigationSignOut}
+        >
+          <UserLogOut />
+          <span className="title-text">{isLoggedUser ? "Sign Out" : ""}</span>
         </a>
       </div>
     </nav>

@@ -60,7 +60,7 @@ body {
   gap: 4px;
 }
 
-.main-nav-item:hover {
+.main-nav-item:hover .title-text {
   text-decoration: underline;
 }
 
@@ -300,4 +300,13 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+.hidden {
+  display: none;
+}
+
+.main-nav-title {
+  display: flex;
+  gap: 6px;
 }
