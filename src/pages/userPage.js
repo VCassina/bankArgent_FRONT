@@ -1,29 +1,30 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/main.css";
 import WelcomeUser from "../components/WelcomeUser";
 import Account from "../components/Account";
-import { useSelector } from "react-redux";
+import tokenChecking from "../helpers/tokenChecking";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedUserTokenStatus } from "../store";
 import { useNavigate } from "react-router-dom";
 
 function UserPage() {
-  // isUserLogged verification.
-  const isLoggedUser = useSelector((state) => state.isLoggedUser);
+  const actualToken = useSelector((state) => state.loggedUserToken);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(isLoggedUser);
+  const [loading, setLoading] = useState(true);
 
-  // Needed for a working navigate redirection.
   useEffect(() => {
-    if (!isLoggedUser) {
-      navigate("/sign-in");
-    }
-  }, [isLoggedUser, navigate]);
+    const checkToken = async () => {
+      // isUserLogged verification.
+      await tokenChecking(actualToken, dispatch, setLoggedUserTokenStatus, navigate);
+      setLoading(false);
+    };
+    checkToken();
+  }, [actualToken, dispatch, navigate]);
 
-  if (!isLoggedUser) {
-    return null;
+  if (loading) {
+    return <div>Loading...</div>;
   }
-
-  // Dynamic statement for WelcomedUser (with props & Redux) will be implemented soon.
-  // The same fact about Account, a map will be deployed for every accountements founded in MongoDB.
 
   return (
     <>

@@ -4,10 +4,10 @@ import "../styles/main.css";
 import UserIcone from "../items/userIcone";
 import InputWrapper from "../items/inputWrapper";
 import Remember from "../items/remember";
-import callApiPostUserLogin from "../helpers/callApi";
-import { loginAction } from "../store";
+import callAPI from "../helpers/callApi";
 import { useDispatch } from 'react-redux';
-import { setUserToken } from '../store';
+import { setUserToken, setLoggedUserTokenStatus } from "../store";
+
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -34,14 +34,13 @@ function SignInPage() {
     setIsLoading(true);
     setErrorMessage(false);
 
-    callApiPostUserLogin(username, password)
+    callAPI(username, password, dispatch)
       .then((response) => {
         setIsLoading(false);
         if (response.status === 200) {
-            // Verification.
-          dispatch(loginAction);
+          // Verification is good, we dispatch the token & token status.
+          dispatch(setLoggedUserTokenStatus());
           dispatch(setUserToken(response.body.token));
-          console.log()
           navigate("/user");
         } else {
           setErrorMessage(true);
