@@ -10,14 +10,13 @@ import tokenChecking from "../helpers/tokenChecking";
 
 // REDUX will be implemented to modify SignIn to SignOut depending of the state of "isLoggedUser" later.
 function Header() {
-
   // Checking of the status, am i loged-in ?
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedUserTokenStatus = useSelector(
     (state) => state.loggedUserTokenStatus
   );
-  console.log("loggedUserTokenStatus : ", loggedUserTokenStatus)
+  console.log("loggedUserTokenStatus : ", loggedUserTokenStatus);
 
   const handleNavigationSignOut = (event) => {
     event.preventDefault();
@@ -33,7 +32,12 @@ function Header() {
   const handleNavigationSignIn = (event) => {
     event.preventDefault();
     navigate("/sign-in");
-  }
+  };
+
+  const handleNavigationUser = (event) => {
+    event.preventDefault();
+    navigate("/user");
+  };
 
   // It has to be a <nav> to respect the given main.css as well.
   return (
@@ -47,7 +51,15 @@ function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </a>
       <div className="main-nav-title">
-        <a className="main-nav-item" href="/" onClick={handleNavigationSignIn}>
+        <a
+          className="main-nav-item"
+          href="/"
+          onClick={
+            loggedUserTokenStatus
+              ? handleNavigationUser
+              : handleNavigationSignIn
+          }
+        >
           <UserIcone />
           <span className="title-text">
             {loggedUserTokenStatus ? "USER" : "Sign in"}
@@ -59,7 +71,9 @@ function Header() {
           onClick={handleNavigationSignOut}
         >
           <UserLogOut />
-          <span className="title-text">{loggedUserTokenStatus ? "Sign Out" : ""}</span>
+          <span className="title-text">
+            {loggedUserTokenStatus ? "Sign Out" : ""}
+          </span>
         </a>
       </div>
     </nav>
