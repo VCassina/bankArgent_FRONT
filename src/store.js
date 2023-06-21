@@ -3,6 +3,7 @@ import { createStore } from "redux";
 // Declaration of global states.
 const loginBehavior = {
   isLoggedUser: false,
+  loggedUserToken: "TOKEN EXAMPLE",
 };
 
 // Declaration of actions.
@@ -10,10 +11,16 @@ export const loginAction = {
   type: "LOGIN",
 };
 
-// Is a function to being called later. I choose to make an actionCreator for this.
 export const logoutAction = () => {
   return {
     type: "LOGOUT",
+  };
+};
+
+export const setUserToken = (token) => {
+  return {
+    type: "SET_USER_TOKEN",
+    payload: token,
   };
 };
 
@@ -29,6 +36,11 @@ const loginReducer = (state = loginBehavior, action) => {
       return {
         ...state,
         isLoggedUser: false,
+      };
+    case "SET_USER_TOKEN":
+      return {
+        ...state,
+        loggedUserToken: action.payload,
       };
     default:
       return state;

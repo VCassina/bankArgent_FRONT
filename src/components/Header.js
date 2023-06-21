@@ -13,6 +13,8 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log(useSelector(state => state.loggedUserToken));
+
   const handleNavigationSignIn = (event) => {
     event.preventDefault();
     if (isLoggedUser) {
