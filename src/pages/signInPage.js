@@ -5,7 +5,7 @@ import UserIcone from "../items/userIcone";
 import InputWrapper from "../items/inputWrapper";
 import Remember from "../items/remember";
 import callAPI from "../helpers/callApi";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setUserToken, setLoggedUserTokenStatus } from "../store";
 import GreenButton from "../items/greenButton";
 
@@ -13,9 +13,7 @@ function SignInPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-
   const dispatch = useDispatch();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

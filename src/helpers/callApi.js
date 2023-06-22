@@ -1,13 +1,12 @@
 import { setLoggedUserTokenStatus } from "../store";
 
 async function callAPI(email, password, dispatch) {
-
   // Call of the API.
   try {
-    const response = await fetch('http://127.0.0.1:3001/api/v1/user/login', {
-      method: 'POST',
+    const response = await fetch("http://127.0.0.1:3001/api/v1/user/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     });

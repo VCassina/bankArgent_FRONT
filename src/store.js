@@ -53,23 +53,23 @@ const loginReducer = (state = loginBehavior, action) => {
         ...state,
         loggedUserToken: "",
       };
-      case "SET_LOGGED_USER_TOKEN_STATUS":
-        return {
-          ...state,
-          loggedUserTokenStatus: true,
-        };
-      case "RESET_LOGGED_USER_TOKEN_STATUS":
-        return {
-          ...state,
-          loggedUserTokenStatus: false,
-        };
-        case "SET_USER_INFORMATION":
-          return {
-            ...state,
-            informationUsername: action.payload.username,
-            informationFirstname: action.payload.firstname,
-            informationLastname: action.payload.lastname,
-          };
+    case "SET_LOGGED_USER_TOKEN_STATUS":
+      return {
+        ...state,
+        loggedUserTokenStatus: true,
+      };
+    case "RESET_LOGGED_USER_TOKEN_STATUS":
+      return {
+        ...state,
+        loggedUserTokenStatus: false,
+      };
+    case "SET_USER_INFORMATION":
+      return {
+        ...state,
+        informationUsername: action.payload.username,
+        informationFirstname: action.payload.firstname,
+        informationLastname: action.payload.lastname,
+      };
     default:
       return state;
   }

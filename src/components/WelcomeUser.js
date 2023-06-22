@@ -5,13 +5,10 @@ import EditUserInfo from "./EditUserInfo";
 import GreenButton from "../items/greenButton";
 
 function WelcomeUser() {
-  
   const informationFirstname = useSelector(
     (state) => state.informationFirstname
   );
-  const informationLastname = useSelector(
-    (state) => state.informationLastname
-  );
+  const informationLastname = useSelector((state) => state.informationLastname);
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = () => {
     setIsEditing(true);
@@ -27,9 +24,13 @@ function WelcomeUser() {
         Welcome back <br />
         {informationFirstname} {informationLastname}!
       </h1>
-      <GreenButton className="edit-button" onClick={handleEditClick} content="Edit Name"/>
+      <GreenButton
+        className="edit-button"
+        onClick={handleEditClick}
+        content="Edit Name"
+      />
     </div>
   );
 }
 
-export default WelcomeUser
+export default WelcomeUser;
