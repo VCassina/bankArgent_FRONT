@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/main.css";
 import { useSelector } from "react-redux";
 import EditUserInfo from "./EditUserInfo";
+import GreenButton from "../items/greenButton";
 
 function WelcomeUser() {
   
@@ -26,9 +27,7 @@ function WelcomeUser() {
         Welcome back <br />
         {informationFirstname} {informationLastname}!
       </h1>
-      <button className="edit-button" onClick={handleEditClick}>
-        Edit Name
-      </button>
+      <GreenButton className="edit-button" onClick={handleEditClick} content="Edit Name"/>
     </div>
   );
 }

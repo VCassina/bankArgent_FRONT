@@ -7,13 +7,14 @@ import Remember from "../items/remember";
 import callAPI from "../helpers/callApi";
 import { useDispatch } from 'react-redux';
 import { setUserToken, setLoggedUserTokenStatus } from "../store";
+import GreenButton from "../items/greenButton";
 
 function SignInPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +30,6 @@ function SignInPage() {
   };
 
   const handleSignIn = (event) => {
-    event.preventDefault();
     setIsLoading(true);
     setErrorMessage(false);
 
@@ -72,13 +72,14 @@ function SignInPage() {
               onChange={handlePasswordChange}
             />
             <Remember />
-            <button
+            <GreenButton
               className="sign-in-button"
               onClick={handleSignIn}
               disabled={isLoading}
-            >
-              {isLoading ? "Wait..." : "Sign In"}
-            </button>
+              preventDefault={true}
+              content={isLoading ? "Wait..." : "Sign In"}
+            />
+
             {errorMessage && (
               <p className="errorMessage">Informations incorrectes</p>
             )}

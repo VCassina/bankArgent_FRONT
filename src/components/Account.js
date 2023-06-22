@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/main.css";
-import TransactionButton from "../items/transactionButton";
+import GreenButton from "../items/greenButton";
 
 function Account() {
   return (
@@ -10,7 +10,9 @@ function Account() {
             <p className="account-amount">$COMING_SOON</p>
             <p className="account-amount-description">Available Balance</p>
         </div>
-        <TransactionButton />
+        <div className="account-content-wrapper cta">
+          <GreenButton className="transaction-button" onClick={null} disabled={true} content="View transaction" />
+        </div>
     </section>
   );
 }
