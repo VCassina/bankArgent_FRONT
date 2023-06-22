@@ -1,6 +1,6 @@
-import { resetUserToken, resetLoggedUserTokenStatus } from '../store';
+import { resetUserToken, resetLoggedUserTokenStatus, setUserInformation } from '../store';
 
-async function tokenChecking(token, dispatch, tokenCheckingResponse, navigate) {
+async function tokenChecking(token, dispatch, navigate) {
 
     // On purpose fake token to test the disconnection.
     // const outdatedToken = token+"1";
@@ -19,13 +19,13 @@ async function tokenChecking(token, dispatch, tokenCheckingResponse, navigate) {
   
       // Manage of the answer.
       const realToken = await response.json();
-      console.log("Token Checking !", realToken);
 
       // Behavior to apply depending the answer.
       switch (realToken.status) {
         case 200:
-          // Token is still valid, do nothing
-          console.log("I'm unauthorized. CASE 200.");
+          // Token is valid, dispatch users informations.
+          console.log("I'm authorized. CASE 200.");
+          dispatch(setUserInformation(realToken.body.userName, realToken.body.firstName, realToken.body.lastName))
           break;
         case 401:
           // Token is expired or invalid, redirect to "/sign-in" and reset user token.
@@ -35,12 +35,9 @@ async function tokenChecking(token, dispatch, tokenCheckingResponse, navigate) {
           navigate("/sign-in");
           break;
         default:
-          // Handle other statuses if needed.
-          console.log("I'm DEFAULT CASE.");
+          // Handle other statuses if needed - could be removed later.
           break;
       }
-
-      return tokenCheckingResponse;
       
     } catch (error) {
       console.error(error);

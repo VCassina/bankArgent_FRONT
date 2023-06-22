@@ -14,7 +14,7 @@ function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +47,6 @@ function SignInPage() {
         }
       })
       .catch((error) => {
-        console.error(error);
         setIsLoading(false);
       });
   };

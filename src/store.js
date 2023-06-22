@@ -4,6 +4,9 @@ import { createStore } from "redux";
 const loginBehavior = {
   loggedUserToken: "",
   loggedUserTokenStatus: false,
+  informationUsername: "",
+  informationFirstname: "",
+  informationLastname: "",
 };
 
 // Declaration of actions.
@@ -24,6 +27,16 @@ export const setLoggedUserTokenStatus = () => {
 export const resetLoggedUserTokenStatus = () => {
   return {
     type: "RESET_LOGGED_USER_TOKEN_STATUS",
+  };
+};
+export const setUserInformation = (username, firstname, lastname) => {
+  return {
+    type: "SET_USER_INFORMATION",
+    payload: {
+      username,
+      firstname,
+      lastname,
+    },
   };
 };
 
@@ -50,6 +63,13 @@ const loginReducer = (state = loginBehavior, action) => {
           ...state,
           loggedUserTokenStatus: false,
         };
+        case "SET_USER_INFORMATION":
+          return {
+            ...state,
+            informationUsername: action.payload.username,
+            informationFirstname: action.payload.firstname,
+            informationLastname: action.payload.lastname,
+          };
     default:
       return state;
   }

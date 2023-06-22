@@ -4,7 +4,6 @@ import WelcomeUser from "../components/WelcomeUser";
 import Account from "../components/Account";
 import tokenChecking from "../helpers/tokenChecking";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoggedUserTokenStatus } from "../store";
 import { useNavigate } from "react-router-dom";
 
 function UserPage() {
@@ -16,7 +15,7 @@ function UserPage() {
   useEffect(() => {
     const checkToken = async () => {
       // isUserLogged verification.
-      await tokenChecking(actualToken, dispatch, setLoggedUserTokenStatus, navigate);
+      await tokenChecking(actualToken, dispatch, navigate);
       setLoading(false);
     };
     checkToken();

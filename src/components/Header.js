@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetUserToken } from "../store";
 import tokenChecking from "../helpers/tokenChecking";
 
-// REDUX will be implemented to modify SignIn to SignOut depending of the state of "isLoggedUser" later.
 function Header() {
   // Checking of the status, am i loged-in ?
   const navigate = useNavigate();
@@ -16,12 +15,14 @@ function Header() {
   const loggedUserTokenStatus = useSelector(
     (state) => state.loggedUserTokenStatus
   );
-  console.log("loggedUserTokenStatus : ", loggedUserTokenStatus);
+  const informationFirstname = useSelector(
+    (state) => state.informationFirstname
+  );
 
   const handleNavigationSignOut = (event) => {
     event.preventDefault();
     dispatch(resetUserToken());
-    tokenChecking("", dispatch, null, navigate);
+    tokenChecking("", dispatch, navigate);
   };
 
   const handleNavigationHome = (event) => {
@@ -62,7 +63,7 @@ function Header() {
         >
           <UserIcone />
           <span className="title-text">
-            {loggedUserTokenStatus ? "USER" : "Sign in"}
+            {loggedUserTokenStatus ? informationFirstname : "Sign in"}
           </span>
         </a>
         <a
