@@ -8,7 +8,6 @@ import callAPI from "../helpers/callApi";
 import { useDispatch } from 'react-redux';
 import { setUserToken, setLoggedUserTokenStatus } from "../store";
 
-
 function SignInPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);

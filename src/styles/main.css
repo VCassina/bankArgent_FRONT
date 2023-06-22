@@ -310,3 +310,32 @@ body {
   display: flex;
   gap: 6px;
 }
+
+.editUser_form-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editUser_form-item span {
+  color: white;
+  margin: 0px 10px 15px 0px;
+  display: flex;
+  align-items: center;
+  font-size: larger;
+}
+
+.editUser_form-title {
+  color: white;
+  font-size: 36px;
+}
+
+.editUser_form {
+  margin-bottom: 30px;
+}
+
+.input-wrapper input:disabled {
+  opacity: 0.9;
+  background-color: rgb(207, 194, 194);
+  color: rgb(27, 80, 80);
+}
