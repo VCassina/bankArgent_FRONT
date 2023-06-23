@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/main.css";
 import WelcomeUser from "../components/WelcomeUser";
 import Account from "../components/Account";
@@ -12,17 +12,14 @@ function UserPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const checkToken = async () => {
-      // isUserLogged verification.
-      await tokenChecking(actualToken, dispatch, navigate);
-      setLoading(false);
-    };
-    checkToken();
-  }, [actualToken, dispatch, navigate]);
+  const checkToken = async () => {
+    await tokenChecking(actualToken, dispatch, navigate);
+    setLoading(false);
+  };
+  checkToken();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading_userPage">Loading...</div>;
   }
 
   return (
