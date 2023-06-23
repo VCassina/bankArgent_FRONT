@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/main.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import EditUserInfo from "./EditUserInfo";
 import GreenButton from "../items/greenButton";
+import { setScriptStatusIsEditing } from "../store";
 
 function WelcomeUser() {
-  const informationFirstname = useSelector(
-    (state) => state.informationFirstname
-  );
+  const dispatch = useDispatch();
+  const informationFirstname = useSelector((state) => state.informationFirstname);
   const informationLastname = useSelector((state) => state.informationLastname);
-  const [isEditing, setIsEditing] = useState(false);
+  const isEditing = useSelector((state) => state.scriptStatusIsEditing);
+
+  // I can't dispatch directly when giving it to an other component.
   const handleEditClick = () => {
-    setIsEditing(true);
+    dispatch(setScriptStatusIsEditing(true));
   };
 
   if (isEditing) {
-    return <EditUserInfo />;
+    return (
+      <EditUserInfo/>
+    );
   }
 
   return (

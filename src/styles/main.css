@@ -330,12 +330,28 @@ body {
   font-size: 36px;
 }
 
-.editUser_form {
-  margin-bottom: 30px;
-}
-
 .input-wrapper input:disabled {
   opacity: 0.9;
   background-color: rgb(207, 194, 194);
   color: rgb(27, 80, 80);
+}
+
+.editUser_form-buttonManager {
+  display: flex;
+  width: 40vw;
+  gap: 15px;
+  margin: 10px auto 40px auto;
+  justify-content: center;
+}
+
+.edit-button-postForm {
+  display: block;
+  width: 30%;
+  padding: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
 }

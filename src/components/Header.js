@@ -5,45 +5,44 @@ import UserIcone from "../items/userIcone";
 import UserLogOut from "../items/userLogOut";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { resetUserToken } from "../store";
+import { resetUserToken, setScriptStatusIsEditing } from "../store";
 import tokenChecking from "../helpers/tokenChecking";
 
 function Header() {
   // Checking of the status, am i loged-in ?
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loggedUserTokenStatus = useSelector(
-    (state) => state.loggedUserTokenStatus
-  );
-  const informationFirstname = useSelector(
-    (state) => state.informationFirstname
-  );
+  const loggedUserTokenStatus = useSelector((state) => state.loggedUserTokenStatus);
+  const informationFirstname = useSelector((state) => state.informationFirstname);
 
-  const handleNavigationSignOut = (event) => {
+  // Depending of where i do need to navigate.
+  const handleNavigation = (navigationInput) => (event) => {
     event.preventDefault();
-    dispatch(resetUserToken());
-    tokenChecking("", dispatch, navigate);
-  };
-
-  const handleNavigationHome = (event) => {
-    event.preventDefault();
-    navigate("/");
-  };
-
-  const handleNavigationSignIn = (event) => {
-    event.preventDefault();
-    navigate("/sign-in");
-  };
-
-  const handleNavigationUser = (event) => {
-    event.preventDefault();
-    navigate("/user");
+    switch (navigationInput) {
+      case "home":
+        navigate("/");
+        break;
+      case "signIn":
+        navigate("/sign-in");
+        break;
+      case "user":
+        navigate("/user");
+        break;
+      case "signOut":
+        // Can't group it because Redux is weird-buildt.
+        dispatch(resetUserToken());
+        dispatch(setScriptStatusIsEditing(false));
+        tokenChecking("", dispatch, navigate);
+        break;
+      default:
+        break;
+    }
   };
 
   // It has to be a <nav> to respect the given main.css as well.
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="/" onClick={handleNavigationHome}>
+      <a className="main-nav-logo" href="/" onClick={handleNavigation("home")}>
         <img
           className="main-nav-logo-image"
           src={BankLogo}
@@ -57,8 +56,8 @@ function Header() {
           href="/"
           onClick={
             loggedUserTokenStatus
-              ? handleNavigationUser
-              : handleNavigationSignIn
+              ? handleNavigation("user")
+              : handleNavigation("signIn")
           }
         >
           <UserIcone />
@@ -69,7 +68,7 @@ function Header() {
         <a
           className={loggedUserTokenStatus ? "main-nav-item" : "hidden"}
           href="/"
-          onClick={handleNavigationSignOut}
+          onClick={handleNavigation("signOut")}
         >
           <UserLogOut />
           <span className="title-text">
@@ -80,9 +79,5 @@ function Header() {
     </nav>
   );
 }
-
-/* !! CAUTION !!
-It's not the same icone as we can see on the static exemple but i didn't find it on fontAwesome.
-*/
 
 export default Header;

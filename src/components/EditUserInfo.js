@@ -1,33 +1,52 @@
 import React, { useState } from "react";
-import "../styles/main.css";
+import { useSelector, useDispatch } from "react-redux";
 import InputWrapper from "../items/inputWrapper";
-import { useSelector } from "react-redux";
+import GreenButton from "../items/greenButton";
+import uploadUsername from "../helpers/uploadUsername";
+import WelcomeUser from "./WelcomeUser";
+import { setScriptStatusIsEditing } from "../store";
 
 function EditUserInfo() {
-  const [username, setUsername] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const handleUsernameChange = (event) => {
-    const value = event.target.value;
-    setUsername(value);
-  };
-  const handleFirstName = (event) => {
-    const value = event.target.value;
-    setFirstname(value);
-  };
-  const handleLastName = (event) => {
-    const value = event.target.value;
-    setLastname(value);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.loggedUserToken);
+  const isEditing = useSelector((state) => state.scriptStatusIsEditing);
+  const informationUsername = useSelector((state) => state.informationUsername);
+  const informationFirstname = useSelector((state) => state.informationFirstname);
+  const informationLastname = useSelector((state) => state.informationLastname);
+  
+  // The fusion of 3 values in one useState. Didn't know it was possible.
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+  });
+
+  // Depending of the name refered, the modification will be applied. Could work if we decide to allow the user to change the first or lastname too.
+  const handleInputChange = (input) => (event) => {
+    const { value } = event.target;
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [input]: value,
+    }));
   };
 
-  const informationUsername = useSelector((state) => state.informationUsername);
-  const informationFirstname = useSelector(
-    (state) => state.informationFirstname
-  );
-  const informationLastname = useSelector((state) => state.informationLastname);
+  // Update the DB by contacting the API and then dispatch the isEditing status to bring back WelcomeUser.js.
+  const handleInputSave = (choose) => {
+    if (choose === true) {
+    uploadUsername(userInfo.username, token, dispatch);
+    // I feel it very unconfortable.
+    // dispatch(setScriptStatusIsEditing(false));
+    } else {
+      dispatch(setScriptStatusIsEditing(false));
+    }
+  }
+
+  if (!isEditing) {
+    return <WelcomeUser />;
+  }
 
   return (
-    <div className="COMING_SOON">
+    <>
       <h2 className="editUser_form-title">Edit User Info</h2>
       <div className="editUser_form">
         <div className="editUser_form-item">
@@ -36,39 +55,39 @@ function EditUserInfo() {
             category="username"
             type="text"
             title=""
-            value={username}
-            onChange={handleUsernameChange}
+            value={userInfo.username}
+            onChange={handleInputChange("username")}
             placeholder={informationUsername}
           />
         </div>
-
         <div className="editUser_form-item">
           <span>First name :</span>
           <InputWrapper
-            category="firstname"
             type="text"
-            title=""
-            value={firstname}
-            onChange={handleFirstName}
+            value={userInfo.firstname}
             placeholder={informationFirstname}
             isDisabled={true}
           />
         </div>
-
         <div className="editUser_form-item">
           <span>Last name :</span>
           <InputWrapper
-            category="lastname"
             type="text"
-            title=""
-            value={lastname}
-            onChange={handleLastName}
+            value={userInfo.lastname}
             placeholder={informationLastname}
             isDisabled={true}
           />
         </div>
       </div>
-    </div>
+      <div className="editUser_form-buttonManager">
+        <GreenButton
+          content="Save"
+          className="edit-button-postForm"
+          onClick={() => handleInputSave(true)}
+        />
+        <GreenButton content="Cancel" className="edit-button-postForm"  onClick={() => handleInputSave(false)}/>
+      </div>
+    </>
   );
 }
 

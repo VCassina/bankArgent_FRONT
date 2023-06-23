@@ -11,41 +11,33 @@ import GreenButton from "../items/greenButton";
 
 function SignInPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-  const dispatch = useDispatch();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
-  const handleUsernameChange = (event) => {
-    const value = event.target.value;
-    setUsername(value);
+  const handleLogInChange = (input) => (event) => {
+    const { value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [input]: value,
+    }));
   };
 
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
-
-  const handleSignIn = (event) => {
+  // Sending information to the API.
+  const handleSignIn = () => {
     setIsLoading(true);
-    setErrorMessage(false);
-
-    callAPI(username, password, dispatch)
-      .then((response) => {
-        setIsLoading(false);
-        if (response.status === 200) {
-          // Verification is good, we dispatch the token & token status.
-          dispatch(setLoggedUserTokenStatus());
-          dispatch(setUserToken(response.body.token));
-          navigate("/user");
-        } else {
-          setErrorMessage(true);
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    callAPI(formData.username, formData.password, dispatch).then((response) => {
+      setIsLoading(false);
+      if (response.status === 200) {
+        dispatch(setLoggedUserTokenStatus(true));
+        dispatch(setUserToken(response.body.token));
+        navigate("/user");
+      } else {
+        setErrorMessage(true);
+      }
+    });
   };
 
   return (
@@ -59,15 +51,15 @@ function SignInPage() {
               category="username"
               type="text"
               title="Username"
-              value={username}
-              onChange={handleUsernameChange}
+              value={formData.username}
+              onChange={handleLogInChange("username")}
             />
             <InputWrapper
               category="password"
               type="password"
               title="Password"
-              value={password}
-              onChange={handlePasswordChange}
+              value={formData.password}
+              onChange={handleLogInChange("password")}
             />
             <Remember />
             <GreenButton
@@ -77,7 +69,6 @@ function SignInPage() {
               preventDefault={true}
               content={isLoading ? "Wait..." : "Sign In"}
             />
-
             {errorMessage && (
               <p className="errorMessage">Informations incorrectes</p>
             )}
