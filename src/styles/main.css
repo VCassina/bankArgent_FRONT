@@ -368,3 +368,7 @@ body {
   color: white;
   font-size: x-large;
 }
+
+.filler-void {
+  padding-top: 60px;
+}

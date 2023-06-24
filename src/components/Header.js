@@ -5,7 +5,7 @@ import UserIcone from "../items/userIcone";
 import UserLogOut from "../items/userLogOut";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { resetUserToken, setScriptStatusIsEditing } from "../store";
+import { resetUserToken, setScriptStatusIsEditing, setScriptStatusIsReadingTransaction } from "../store";
 import tokenChecking from "../helpers/tokenChecking";
 
 function Header() {
@@ -14,6 +14,8 @@ function Header() {
   const dispatch = useDispatch();
   const loggedUserTokenStatus = useSelector((state) => state.loggedUserTokenStatus);
   const informationFirstname = useSelector((state) => state.informationFirstname);
+  dispatch(setScriptStatusIsEditing(false));
+  dispatch(setScriptStatusIsReadingTransaction(false));
 
   // Depending of where i do need to navigate.
   const handleNavigation = (navigationInput) => (event) => {
@@ -31,7 +33,6 @@ function Header() {
       case "signOut":
         // Can't group it because Redux is weird-buildt.
         dispatch(resetUserToken());
-        dispatch(setScriptStatusIsEditing(false));
         tokenChecking("", dispatch, navigate);
         break;
       default:

@@ -1,6 +1,5 @@
-import { setLoggedUserTokenStatus } from "../store";
 
-async function callAPI(email, password, dispatch) {
+async function callAPI(email, password ) {
   try {
     const response = await fetch("http://127.0.0.1:3001/api/v1/user/login", {
       method: "POST",
@@ -9,11 +8,8 @@ async function callAPI(email, password, dispatch) {
       },
       body: JSON.stringify({ email, password }),
     });
-
-    // Manage of the answer.
     const data = await response.json();
     if (data.status === 200) {
-      dispatch(setLoggedUserTokenStatus());
       return data;
     }
   } catch (error) {

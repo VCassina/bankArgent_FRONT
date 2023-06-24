@@ -8,6 +8,7 @@ const loginBehavior = {
   informationFirstname: "",
   informationLastname: "",
   scriptStatusIsEditing: false,
+  scriptStatusIsReadingTransaction: false,
 };
 
 // Declaration of actions.
@@ -40,11 +41,17 @@ export const saveUserNickname = (username) => {
   return {
     type: "SAVE_USER_NICKNAME",
     payload: username,
-  }
-}
+  };
+};
 export const setScriptStatusIsEditing = (bolean) => {
   return {
     type: "SET_SCRIPT_STATUS_IS_EDITING",
+    payload: bolean,
+  };
+};
+export const setScriptStatusIsReadingTransaction = (bolean) => {
+  return {
+    type: "SET_SCRIPT_STATUS_IS_READING_TRANSACTION",
     payload: bolean,
   };
 };
@@ -74,16 +81,21 @@ const loginReducer = (state = loginBehavior, action) => {
         informationFirstname: action.payload.firstname,
         informationLastname: action.payload.lastname,
       };
-      case "SAVE_USER_NICKNAME":
-        return {
-          ...state,
-          informationUsername: action.payload.username,
-        }
-        case "SET_SCRIPT_STATUS_IS_EDITING":
-          return {
-            ...state,
-            scriptStatusIsEditing: action.payload,
-          }
+    case "SAVE_USER_NICKNAME":
+      return {
+        ...state,
+        informationUsername: action.payload.username,
+      };
+    case "SET_SCRIPT_STATUS_IS_EDITING":
+      return {
+        ...state,
+        scriptStatusIsEditing: action.payload,
+      };
+    case "SET_SCRIPT_STATUS_IS_READING_TRANSACTION":
+      return {
+        ...state,
+        scriptStatusIsReadingTransaction: action.payload,
+      };
     default:
       return state;
   }

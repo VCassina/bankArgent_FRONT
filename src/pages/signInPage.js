@@ -28,16 +28,22 @@ function SignInPage() {
   // Sending information to the API.
   const handleSignIn = () => {
     setIsLoading(true);
-    callAPI(formData.username, formData.password, dispatch).then((response) => {
-      setIsLoading(false);
-      if (response.status === 200) {
-        dispatch(setLoggedUserTokenStatus(true));
-        dispatch(setUserToken(response.body.token));
-        navigate("/user");
-      } else {
+    callAPI(formData.username, formData.password)
+      .then((response) => {
+        setIsLoading(false);
+        if (response.status === 200) {
+          console.log("Status 2000")
+          dispatch(setLoggedUserTokenStatus(true));
+          dispatch(setUserToken(response.body.token));
+          navigate("/user");
+        } else {
+          setErrorMessage(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
         setErrorMessage(true);
-      }
-    });
+      });
   };
 
   return (
