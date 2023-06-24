@@ -1,11 +1,16 @@
 import React from "react";
 import "../styles/main.css";
 import GreenButton from "../items/greenButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setScriptStatusIsReadingTransaction } from "../store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function Account() {
   const dispatch = useDispatch();
+  const scriptStatusIsReadingTransaction = useSelector(
+    (state) => state.scriptStatusIsReadingTransaction
+  );
 
   return (
     <section className="account">
@@ -15,11 +20,19 @@ function Account() {
         <p className="account-amount-description">Available Balance</p>
       </div>
       <div className="account-content-wrapper cta">
-        <GreenButton
-          className="transaction-button"
-          onClick={() => dispatch(setScriptStatusIsReadingTransaction(true))}
-          content="View transaction"
-        />
+        {scriptStatusIsReadingTransaction ? (
+          <FontAwesomeIcon icon={faTimes} className="cross-icon" onClick={() =>
+            dispatch(setScriptStatusIsReadingTransaction(false))
+          } />
+        ) : (
+          <GreenButton
+            className="transaction-button"
+            onClick={() =>
+              dispatch(setScriptStatusIsReadingTransaction(true))
+            }
+            content="View transaction"
+          />
+        )}
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ function UserPage() {
       <main className={`main bg-dark ${isReadingTransaction ? "filler-void" : ""}`}>
       {isReadingTransaction ? null : <WelcomeUser />}
         <Account />
-        {isReadingTransaction ? null : <TransactionReading />}
+        {isReadingTransaction ? <TransactionReading /> : null}
       </main>
     </>
   );
