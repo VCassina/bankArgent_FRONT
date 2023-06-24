@@ -2,7 +2,10 @@ import React from "react";
 import "../styles/main.css";
 import GreenButton from "../items/greenButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setScriptStatusIsReadingTransaction } from "../store";
+import {
+  setScriptStatusIsReadingTransaction,
+  setScriptStatusIsEditing,
+} from "../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,15 +24,18 @@ function Account() {
       </div>
       <div className="account-content-wrapper cta">
         {scriptStatusIsReadingTransaction ? (
-          <FontAwesomeIcon icon={faTimes} className="cross-icon" onClick={() =>
-            dispatch(setScriptStatusIsReadingTransaction(false))
-          } />
+          <FontAwesomeIcon
+            icon={faTimes}
+            className="cross-icon"
+            onClick={() => dispatch(setScriptStatusIsReadingTransaction(false))}
+          />
         ) : (
           <GreenButton
             className="transaction-button"
-            onClick={() =>
-              dispatch(setScriptStatusIsReadingTransaction(true))
-            }
+            onClick={() => {
+              dispatch(setScriptStatusIsReadingTransaction(true));
+              dispatch(setScriptStatusIsEditing(false));
+            }}
             content="View transaction"
           />
         )}
