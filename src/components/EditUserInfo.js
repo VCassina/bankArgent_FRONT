@@ -35,7 +35,7 @@ function EditUserInfo() {
     if (choose === true) {
     uploadUsername(userInfo.username, token, dispatch);
     // I feel it very unconfortable.
-    // dispatch(setScriptStatusIsEditing(false));
+    dispatch(setScriptStatusIsEditing(false));
     } else {
       dispatch(setScriptStatusIsEditing(false));
     }
