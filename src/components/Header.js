@@ -6,7 +6,7 @@ import UserLogOut from "../items/userLogOut";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUserToken, setScriptStatusIsEditing, setScriptStatusIsReadingTransaction } from "../store";
-import tokenChecking from "../helpers/tokenChecking";
+import tokenChecking from "../helpers/tokenInfoRequest";
 
 function Header() {
   // Checking of the status, am i loged-in ?

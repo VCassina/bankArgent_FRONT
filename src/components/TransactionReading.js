@@ -1,8 +1,25 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import tokenChecking from "../helpers/tokenInfoRequest";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function TransactionReading() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const actualToken = useSelector((state) => state.loggedUserToken);
+  
+  const checkToken = async () => {
+    await tokenChecking(actualToken, dispatch, navigate);
+  };
+
+  const handleViewDetailsClick = () => {
+    /* Unthread the collapser + ... */
+    checkToken();
+  };
+
+
   return (
     <article className="transaction_reading-container">
       <table className="transaction-table">
@@ -23,7 +40,7 @@ function TransactionReading() {
             <td>$100</td>
             <td>$500</td>
             <td>
-              <span onClick={null} className="collapser">
+              <span onClick={handleViewDetailsClick} className="collapser">
                 <FontAwesomeIcon icon={faChevronDown} />
               </span>
             </td>
@@ -36,7 +53,7 @@ function TransactionReading() {
             <td>$200</td>
             <td>$300</td>
             <td>
-              <span onClick={null} className="collapser">
+              <span onClick={handleViewDetailsClick} className="collapser">
                 <FontAwesomeIcon icon={faChevronDown} />
               </span>
             </td>
@@ -49,7 +66,7 @@ function TransactionReading() {
             <td>$200</td>
             <td>$300</td>
             <td>
-              <span onClick={null} className="collapser">
+              <span onClick={handleViewDetailsClick} className="collapser">
                 <FontAwesomeIcon icon={faChevronDown} />
               </span>
             </td>
@@ -62,7 +79,7 @@ function TransactionReading() {
             <td>$200</td>
             <td>$300</td>
             <td>
-              <span onClick={null} className="collapser">
+              <span onClick={handleViewDetailsClick} className="collapser">
                 <FontAwesomeIcon icon={faChevronDown} />
               </span>
             </td>

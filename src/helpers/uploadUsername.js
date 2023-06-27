@@ -1,4 +1,4 @@
-import tokenChecking from "./tokenChecking";
+import tokenChecking from "./tokenInfoRequest";
 import  { saveUserNickname } from "../store";
 
 const uploadUsername = async (username, token, dispatch) => {
