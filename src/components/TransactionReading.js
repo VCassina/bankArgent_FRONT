@@ -19,7 +19,6 @@ function TransactionReading() {
     checkToken();
   };
 
-
   return (
     <article className="transaction_reading-container">
       <table className="transaction-table">
@@ -32,7 +31,7 @@ function TransactionReading() {
           </tr>
         </thead>
         <tbody>
-          <tr class="table-row">
+          <tr className="table-row">
             <td>01/01/2023</td>
             <td>
               <span>Payment received</span>
@@ -45,7 +44,7 @@ function TransactionReading() {
               </span>
             </td>
           </tr>
-          <tr class="table-row">
+          <tr className="table-row">
             <td>02/01/2023</td>
             <td>
               <span>Invoice #123</span>
@@ -58,7 +57,7 @@ function TransactionReading() {
               </span>
             </td>
           </tr>
-          <tr class="table-row">
+          <tr className="table-row">
             <td>02/01/2023</td>
             <td>
               <span>Invoice #456</span>
@@ -71,7 +70,7 @@ function TransactionReading() {
               </span>
             </td>
           </tr>
-          <tr class="table-row">
+          <tr className="table-row">
             <td>02/01/2023</td>
             <td>
               <span>Invoice #789</span>

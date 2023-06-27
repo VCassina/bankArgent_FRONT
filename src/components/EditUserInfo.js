@@ -4,12 +4,13 @@ import InputWrapper from "../items/inputWrapper";
 import GreenButton from "../items/greenButton";
 import uploadUsername from "../helpers/uploadUsername";
 import WelcomeUser from "./WelcomeUser";
-import { setScriptStatusIsEditing } from "../store";
 
-function EditUserInfo() {
+function EditUserInfo({ isEditing, setIsEditing }) {
+  
+  console.log(isEditing)
+  console.log(setIsEditing)
   const dispatch = useDispatch();
   const token = useSelector((state) => state.loggedUserToken);
-  const isEditing = useSelector((state) => state.scriptStatusIsEditing);
   const informationUsername = useSelector((state) => state.informationUsername);
   const informationFirstname = useSelector((state) => state.informationFirstname);
   const informationLastname = useSelector((state) => state.informationLastname);
@@ -35,15 +36,15 @@ function EditUserInfo() {
     if (choose === true) {
     uploadUsername(userInfo.username, token, dispatch);
     // I feel it very unconfortable.
-    dispatch(setScriptStatusIsEditing(false));
+    setIsEditing(!isEditing)
     } else {
-      dispatch(setScriptStatusIsEditing(false));
+      setIsEditing(!isEditing)
     }
   }
 
-  if (!isEditing) {
-    return <WelcomeUser />;
-  }
+ if (!isEditing) {
+   return <WelcomeUser />;
+ } 
 
   return (
     <>

@@ -12,7 +12,8 @@ function UserPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const isReadingTransaction = useSelector((state) => state.scriptStatusIsReadingTransaction);
+  const [isReadingTransaction, setIsReadingTransaction] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const checkToken = async () => {
     await tokenChecking(actualToken, dispatch, navigate);
@@ -26,9 +27,16 @@ function UserPage() {
 
   return (
     <>
-      <main className={`main bg-dark ${isReadingTransaction ? "filler-void" : ""}`}>
-      {isReadingTransaction ? null : <WelcomeUser checkToken={checkToken}/>}
-      <Account />
+      <main
+        className={`main bg-dark ${isReadingTransaction ? "filler-void" : ""}`}
+      >
+        {isReadingTransaction ? null : (
+          <WelcomeUser isEditing={isEditing} setIsEditing={setIsEditing} />
+        )}
+        <Account
+          isReadingTransaction={isReadingTransaction}
+          setIsReadingTransaction={setIsReadingTransaction}
+        />
         {isReadingTransaction ? <TransactionReading /> : null}
       </main>
     </>

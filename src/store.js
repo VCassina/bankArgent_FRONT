@@ -6,9 +6,7 @@ const loginBehavior = {
   loggedUserTokenStatus: false,
   informationUsername: "",
   informationFirstname: "",
-  informationLastname: "",
-  scriptStatusIsEditing: false,
-  scriptStatusIsReadingTransaction: false,
+  informationLastname: ""
 };
 
 // Declaration of actions.
@@ -43,18 +41,7 @@ export const saveUserNickname = (username) => {
     payload: username,
   };
 };
-export const setScriptStatusIsEditing = (bolean) => {
-  return {
-    type: "SET_SCRIPT_STATUS_IS_EDITING",
-    payload: bolean,
-  };
-};
-export const setScriptStatusIsReadingTransaction = (bolean) => {
-  return {
-    type: "SET_SCRIPT_STATUS_IS_READING_TRANSACTION",
-    payload: bolean,
-  };
-};
+
 
 // Declaration of the reducer.
 const loginReducer = (state = loginBehavior, action) => {
@@ -85,16 +72,6 @@ const loginReducer = (state = loginBehavior, action) => {
       return {
         ...state,
         informationUsername: action.payload.username,
-      };
-    case "SET_SCRIPT_STATUS_IS_EDITING":
-      return {
-        ...state,
-        scriptStatusIsEditing: action.payload,
-      };
-    case "SET_SCRIPT_STATUS_IS_READING_TRANSACTION":
-      return {
-        ...state,
-        scriptStatusIsReadingTransaction: action.payload,
       };
     default:
       return state;
