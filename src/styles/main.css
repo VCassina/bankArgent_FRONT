@@ -550,6 +550,10 @@ th {
     text-overflow: ellipsis;
   }
 
+  .editUser_form {
+    padding: 15px;
+  }
+
 }
 
 @media (max-width: 365px) {
