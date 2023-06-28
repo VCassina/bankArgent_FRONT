@@ -395,6 +395,12 @@ body {
 } 
 
 .transaction-table th:first-child,
+.transaction-table th:nth-child(2) {
+  position: relative;
+  left: 2rem;
+}
+
+.transaction-table th:first-child,
 .transaction-table td:first-child {
   width: 20%;
 }
