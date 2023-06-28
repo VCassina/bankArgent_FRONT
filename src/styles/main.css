@@ -13,8 +13,11 @@ body {
   min-height: 100vh;
 }
 
+
 .main {
   flex: 1;
+  height: 100vh;
+  padding-top: 20px;
 }
 
 .bg-dark {
@@ -517,6 +520,9 @@ th {
   .main-nav {
     flex-direction: column;
     align-items: baseline;
+    padding-bottom: 20px;
+    font-size: 20px;
+    gap: 10px;
   }
 
   .main-nav-title {
@@ -607,7 +613,6 @@ th {
     display: inline-block;
     width: 40px;
   }
-
 }
 
 

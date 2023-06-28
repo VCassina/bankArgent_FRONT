@@ -5,7 +5,7 @@ function Remember() {
   return (
     <div className="input-remember">
       <input id="remember-me" type="checkbox"/>
-      <label for="remember-me">Remember me</label>
+      <label htmlFor="remember-me">Remember me</label>
     </div>
   );
 }

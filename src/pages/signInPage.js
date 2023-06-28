@@ -32,7 +32,6 @@ function SignInPage() {
       .then((response) => {
         setIsLoading(false);
         if (response.status === 200) {
-          console.log("Status 200.")
           dispatch(setLoggedUserTokenStatus(true));
           dispatch(setUserToken(response.body.token));
           navigate("/user");
