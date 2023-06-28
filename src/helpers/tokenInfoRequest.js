@@ -19,7 +19,6 @@ async function tokenInfoRequest(token, dispatch, navigate) {
     const realToken = await response.json();
     if (realToken.status === 200) {
       // Token is still valid, dispatch users informations to refresh.
-      console.log("Token is valid.");
       dispatch(
         setUserInformation(
           realToken.body.userName,
