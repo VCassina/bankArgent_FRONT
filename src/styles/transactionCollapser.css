@@ -1,7 +1,12 @@
 .underline {
-  display: flexbox;
   position: relative;
   font-size: 14px;
+  background-color: #00bc77;
+  z-index: 0;
+}
+
+svg {
+  z-index: 1;
 }
 
 ._1 {
@@ -18,10 +23,6 @@
 }
 
 .underline_item-left {
-  /* position: relative;
-  left: 44px; */
-  /* text-align: left; */
-  /* display: inline-block; */
   width: 20%;
 }
 
@@ -38,6 +39,12 @@
 
 .transaction-table td:nth-child(2), .transaction-table th:nth-child(2) {
   text-align: left;
+}
+
+.transaction-table td:nth-child(2), .transaction-table th:nth-child(2) span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .underline_item-editLine input {

@@ -280,6 +280,7 @@ body {
   display: block;
   width: 100%;
   padding: 8px;
+  margin: 8px;
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
@@ -292,19 +293,6 @@ body {
     flex: 0;
   }
 
-@media (min-width: 720px) {
-  .account {
-    flex-direction: row;
-  }
-
-  /* .account-content-wrapper.cta {
-    flex: 0;
-  } */
-
-  .transaction-button {
-    width: 200px;
-  }
-}
 
 .hidden {
   display: none;
@@ -454,6 +442,28 @@ th {
   width: 60px;
   height: 100%;
   cursor: pointer;
+}
+
+@media (min-width: 720px) {
+  .account {
+    flex-direction: row;
+  }
+
+  .transaction-button {
+    width: 200px;
+  }
+}
+
+@media (max-width: 580px) {
+  .transaction-table th:first-child, .transaction-table th:nth-child(2) {
+    position: static;
+  }
+  .transaction-table td:nth-child(2), .transaction-table th:nth-child(2) span {
+    max-width: 100px;
+  }
+  .transaction_reading-container {
+    width: auto;
+  }
 }
 
 /* @media screen and (max-width: 768px) {
