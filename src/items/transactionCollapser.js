@@ -12,7 +12,7 @@ function TransactionCollapser({
   category,
   note,
   isOpen,
-  onClick
+  onClick,
 }) {
   const collapserClassName = isOpen ? "collapser open" : "collapser";
   const [isCategoryEditVisible, setCategoryEditVisible] = useState(false);
@@ -61,11 +61,8 @@ function TransactionCollapser({
             <input type="text" />
           ) : (
             <span>{category}</span>
-          )} 
-          <FontAwesomeIcon
-            icon={faPencil}
-            onClick={handleCategoryEditClick}
-          />
+          )}
+          <FontAwesomeIcon icon={faPencil} onClick={handleCategoryEditClick} />
         </td>
         <td></td>
         <td></td>
