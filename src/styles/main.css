@@ -234,7 +234,7 @@ body {
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 1.5rem;
   box-sizing: border-box;
   text-align: left;
@@ -288,14 +288,18 @@ body {
   color: #fff;
 }
 
+.account-content-wrapper.cta {
+    flex: 0;
+  }
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;
   }
 
-  .account-content-wrapper.cta {
+  /* .account-content-wrapper.cta {
     flex: 0;
-  }
+  } */
 
   .transaction-button {
     width: 200px;
@@ -347,6 +351,7 @@ body {
 .edit-button-postForm {
   display: block;
   width: 30%;
+  min-width: 120px;
   padding: 20px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -354,6 +359,7 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  text-align: center;
 }
 
 .loading_userPage {
@@ -449,6 +455,12 @@ th {
   height: 100%;
   cursor: pointer;
 }
+
+/* @media screen and (max-width: 768px) {
+  /* .cross-icon {
+    width: 20px;
+  } */
+
 
 /* To get a rounded table - Considering that it didn't be apply on the account component, 
 // i assume that it's not necessary.
