@@ -1,24 +1,29 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
 import tokenChecking from "../helpers/tokenInfoRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import TransactionCollapser from "../items/transactionCollapser";
+import data from "../datas/accountStaticContent.json";
 
 function TransactionReading() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const actualToken = useSelector((state) => state.loggedUserToken);
-  
+  const [isOpenCollapser, setIsOpenCollapser] = useState(
+    data.transactions.map(() => false)
+  );
+
   const checkToken = async () => {
     await tokenChecking(actualToken, dispatch, navigate);
   };
 
-  const handleViewDetailsClick = () => {
+  const handleViewDetailsClick = (index) => {
     /* Unthread the collapser + ... */
     checkToken();
+    const updatedCollapserState = [...isOpenCollapser];
+    updatedCollapserState[index] = !updatedCollapserState[index];
+    setIsOpenCollapser(updatedCollapserState);
   };
-
   return (
     <article className="transaction_reading-container">
       <table className="transaction-table">
@@ -31,58 +36,20 @@ function TransactionReading() {
           </tr>
         </thead>
         <tbody>
-          <tr className="table-row">
-            <td>01/01/2023</td>
-            <td>
-              <span>Payment received</span>
-            </td>
-            <td>$100</td>
-            <td>$500</td>
-            <td>
-              <span onClick={handleViewDetailsClick} className="collapser">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </span>
-            </td>
-          </tr>
-          <tr className="table-row">
-            <td>02/01/2023</td>
-            <td>
-              <span>Invoice #123</span>
-            </td>
-            <td>$200</td>
-            <td>$300</td>
-            <td>
-              <span onClick={handleViewDetailsClick} className="collapser">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </span>
-            </td>
-          </tr>
-          <tr className="table-row">
-            <td>02/01/2023</td>
-            <td>
-              <span>Invoice #456</span>
-            </td>
-            <td>$200</td>
-            <td>$300</td>
-            <td>
-              <span onClick={handleViewDetailsClick} className="collapser">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </span>
-            </td>
-          </tr>
-          <tr className="table-row">
-            <td>02/01/2023</td>
-            <td>
-              <span>Invoice #789</span>
-            </td>
-            <td>$200</td>
-            <td>$300</td>
-            <td>
-              <span onClick={handleViewDetailsClick} className="collapser">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </span>
-            </td>
-          </tr>
+          {data.transactions.map((data, index) => (
+            <TransactionCollapser
+              key={index}
+              date={data.date}
+              description={data.description}
+              amount={data.amount}
+              balance={data.balance}
+              type={data.type}
+              category={data.category}
+              note={data.note}
+              onClick={() => handleViewDetailsClick(index)}
+              isOpen={isOpenCollapser[index]}
+            />
+          ))}
         </tbody>
       </table>
     </article>

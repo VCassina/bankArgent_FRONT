@@ -1,0 +1,45 @@
+.underline {
+  display: flexbox;
+  position: relative;
+  font-size: 14px;
+}
+
+._1 {
+  bottom: 6px;
+}
+
+._2 {
+  bottom: 12px;
+}
+
+._3 {
+  bottom: 18px;
+
+}
+
+.underline_item-left {
+  /* position: relative;
+  left: 44px; */
+  /* text-align: left; */
+  /* display: inline-block; */
+  width: 20%;
+}
+
+.underline_item-editIcon {
+  cursor: pointer;
+}
+
+.underline_item-editLine {
+  display: flex;
+  gap: 10px;
+  width: 100% !important;
+  height: 20px;
+}
+
+.transaction-table td:nth-child(2), .transaction-table th:nth-child(2) {
+  text-align: left;
+}
+
+.underline_item-editLine input {
+  max-width: 60px;
+}

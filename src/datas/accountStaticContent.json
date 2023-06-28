@@ -1,0 +1,46 @@
+{
+  "transactions": [
+    {
+      "date": "27/02/20",
+      "description": "Golden Sun Bakery",
+      "amount": 8.0,
+      "balance": 298.0,
+      "type": "Electronic",
+      "category": "Food",
+      "note": ""
+    },
+    {
+      "date": "24/02/20",
+      "description": "Leroy Merlin",
+      "amount": 85.0,
+      "balance": 306.0,
+      "type": "Electronic",
+      "category": "Handiwork",
+      "note": ""
+    },
+    {
+      "date": "23/02/20",
+      "description": "Spotify",
+      "amount": 14.0,
+      "balance": 391.0,
+      "type": "Electronic",
+      "category": "Music",
+      "note": ""
+    },
+    {
+      "date": "20/02/20",
+      "description": "BubbleTea Bercy",
+      "amount": 10.0,
+      "balance": 405.0,
+      "type": "Electronic",
+      "category": "Food",
+      "note": ""
+    }
+  ],
+  "account": [
+    {
+      "id": 3448,
+      "solde": 48098.43
+    }
+  ]
+}
