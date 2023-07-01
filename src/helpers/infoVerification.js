@@ -4,7 +4,6 @@ function editInfoVerification(information) {
   const forbiddenChars = /[;:{}[\]'"()/\\]/;
 
   if (forbiddenChars.test(information)) {
-    console.log("1 detected")
     return 1;
   }
   if (
@@ -12,7 +11,6 @@ function editInfoVerification(information) {
     information.length < minLength ||
     information.length > maxLength
   ) {
-    console.log(information, "2 detected")
     return 2;
   }
 
