@@ -28,22 +28,17 @@ function SignInPage() {
 
   // Sending information to the API.
   const handleSignIn = () => {
-    setIsLoading(true);
+  setIsLoading(true);
 const newStatusEmail = CheckingInformation(formData.username);
 const newStatusPassword = CheckingInformation(formData.password);
 
-console.log(newStatusEmail, newStatusPassword)
-
-
 switch (true) {
   case newStatusEmail === 1 || newStatusPassword === 1:
-    console.log("1")
     setIsLoading(false);
     setErrorMessageContent("Forbidden characters detected.");
     setErrorMessage(true);
     return;
     default:
-      console.log("No 1")
       callAPI(formData.username, formData.password)
         .then((response) => {
           setIsLoading(false);
