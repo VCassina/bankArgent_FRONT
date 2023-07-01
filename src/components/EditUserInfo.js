@@ -40,17 +40,14 @@ function EditUserInfo({ isEditing, setIsEditing }) {
       const newStatus = EditInfoVerification(userInfo.username);
       switch (newStatus) {
         case 0:
-          console.log("0")
           uploadUsername(userInfo.username, token, dispatch);
           setIsEditing(!isEditing);
           break;
         case 1:
-          console.log("1")
           setStatus(newStatus);
           setErrorMessage("New username doesn't allow special characters.");
           break;
         case 2:
-          console.log("2")
           setStatus(newStatus);
           setErrorMessage("New username should be 4 - 16 characters long.");
           break;
