@@ -8,12 +8,13 @@ import callAPI from "../helpers/callApi";
 import { useDispatch } from "react-redux";
 import { setUserToken, setLoggedUserTokenStatus } from "../store";
 import GreenButton from "../items/greenButton";
+import CheckingInformation from "../helpers/infoVerification";
 
 function SignInPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessageContent, setErrorMessageContent] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -28,22 +29,40 @@ function SignInPage() {
   // Sending information to the API.
   const handleSignIn = () => {
     setIsLoading(true);
-    callAPI(formData.username, formData.password)
-      .then((response) => {
-        setIsLoading(false);
-        if (response.status === 200) {
-          dispatch(setLoggedUserTokenStatus(true));
-          dispatch(setUserToken(response.body.token));
-          navigate("/user");
-        } else {
+const newStatusEmail = CheckingInformation(formData.username);
+const newStatusPassword = CheckingInformation(formData.password);
+
+console.log(newStatusEmail, newStatusPassword)
+
+
+switch (true) {
+  case newStatusEmail === 1 || newStatusPassword === 1:
+    console.log("1")
+    setIsLoading(false);
+    setErrorMessageContent("Forbidden characters detected.");
+    setErrorMessage(true);
+    return;
+    default:
+      console.log("No 1")
+      callAPI(formData.username, formData.password)
+        .then((response) => {
+          setIsLoading(false);
+          if (response?.status === 200) {
+            dispatch(setLoggedUserTokenStatus(true));
+            dispatch(setUserToken(response.body.token));
+            navigate("/user");
+          } else {
+            setErrorMessageContent("Wrong information.");
+            setErrorMessage(true);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          setErrorMessageContent("Error occurred.");
           setErrorMessage(true);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setErrorMessage(true);
-      });
-  };
+        });
+      break;
+  }}
 
   return (
     <>
@@ -75,7 +94,7 @@ function SignInPage() {
               content={isLoading ? "Wait..." : "Sign In"}
             />
             {errorMessage && (
-              <p className="errorMessage">Informations incorrectes</p>
+              <p className="errorMessage">{errorMessageContent}</p>
             )}
           </form>
         </section>
