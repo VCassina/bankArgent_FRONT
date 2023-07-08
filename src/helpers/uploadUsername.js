@@ -1,4 +1,4 @@
-import tokenChecking from "./tokenInfoRequest";
+// import tokenChecking from "./tokenInfoRequest";
 import  { saveUserNickname } from "../store";
 
 const uploadUsername = async (username, token, dispatch) => {
@@ -18,8 +18,8 @@ const uploadUsername = async (username, token, dispatch) => {
       const data = await response.json();
       if (response.status === 200) {
         dispatch(saveUserNickname(data.body.userName));
-        // Refresh the informations in global statement.
-        await tokenChecking(token, dispatch);
+        // // Refresh the informations in global statement.
+        // await tokenChecking(token, dispatch);
       }
       return data;
     } catch (error) {

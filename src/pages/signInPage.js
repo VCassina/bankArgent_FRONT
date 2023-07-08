@@ -29,8 +29,8 @@ function SignInPage() {
   // Sending information to the API.
   const handleSignIn = () => {
   setIsLoading(true);
-const newStatusEmail = CheckingInformation(formData.username);
-const newStatusPassword = CheckingInformation(formData.password);
+  const newStatusEmail = CheckingInformation(formData.username);
+  const newStatusPassword = CheckingInformation(formData.password);
 
 switch (true) {
   case newStatusEmail === 1 || newStatusPassword === 1:
@@ -50,11 +50,6 @@ switch (true) {
             setErrorMessageContent("Wrong information.");
             setErrorMessage(true);
           }
-        })
-        .catch((error) => {
-          console.error(error);
-          setErrorMessageContent("Error occurred.");
-          setErrorMessage(true);
         });
       break;
   }}
