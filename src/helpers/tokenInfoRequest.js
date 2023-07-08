@@ -27,6 +27,7 @@ async function tokenInfoRequest(token, dispatch, navigate) {
           realToken.body.lastName
         )
       );
+      dispatch(setLoggedUserTokenStatus(true));
     } else {
       // Token is expired or invalid, redirect to "/sign-in" and reinitialize user token.
       console.log("Token is invalid.");

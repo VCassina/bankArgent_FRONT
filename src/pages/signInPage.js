@@ -6,7 +6,7 @@ import InputWrapper from "../items/inputWrapper";
 import Remember from "../items/remember";
 import callAPI from "../helpers/callApi";
 import { useDispatch } from "react-redux";
-import { setUserToken, setLoggedUserTokenStatus } from "../store";
+import { setUserToken } from "../store";
 import GreenButton from "../items/greenButton";
 import CheckingInformation from "../helpers/infoVerification";
 
@@ -43,7 +43,6 @@ switch (true) {
         .then((response) => {
           setIsLoading(false);
           if (response?.status === 200) {
-            dispatch(setLoggedUserTokenStatus(true));
             dispatch(setUserToken(response.body.token));
             navigate("/user");
           } else {
